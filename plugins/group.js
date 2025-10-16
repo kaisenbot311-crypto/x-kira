@@ -42,7 +42,6 @@ Module({
   package: "group",
   description: "Add member to group",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -88,7 +87,7 @@ Module({
   description: "Remove member from group",
 })(async (message) => {
   await message.loadGroupInfo();
- 
+
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -126,7 +125,6 @@ Module({
   package: "group",
   description: "Promote member to admin",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -159,7 +157,6 @@ Module({
   package: "group",
   description: "Demote admin to member",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -192,7 +189,6 @@ Module({
   package: "group",
   description: "Open group (allow all members to send messages)",
 })(async (message) => {
- 
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -215,7 +211,6 @@ Module({
   package: "group",
   description: "Close group (only admins can send messages)",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -238,7 +233,6 @@ Module({
   package: "group",
   description: "Set group profile picture",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -267,7 +261,6 @@ Module({
   package: "group",
   description: "Change group name/subject",
 })(async (message, match) => {
- 
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -294,7 +287,6 @@ Module({
   package: "group",
   description: "Change group description",
 })(async (message, match) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -337,18 +329,20 @@ Module({
 │
 │ *Total Members:* ${message.groupParticipants.length}
 │ *Admins:* ${message.groupAdmins.length}
-│ *Regular Members:* ${message.groupParticipants.length - message.groupAdmins.length
-      }
+│ *Regular Members:* ${
+      message.groupParticipants.length - message.groupAdmins.length
+    }
 │
 │ *Settings:*
 │ • Messages: ${message.announce ? "Admins Only" : "All Members"}
 │ • Edit Info: ${message.restrict ? "Admins Only" : "All Members"}
 │ • Join Approval: ${message.joinApprovalMode ? "Enabled" : "Disabled"}
 │
-${message.groupMetadata.desc
-        ? `│ *Description:*\n│ ${message.groupMetadata.desc}\n│`
-        : ""
-      }
+${
+  message.groupMetadata.desc
+    ? `│ *Description:*\n│ ${message.groupMetadata.desc}\n│`
+    : ""
+}
 ╰────────────
     `.trim();
 
@@ -368,7 +362,8 @@ Module({
     await message.loadGroupInfo();
 
     if (!message.isGroup) return message.send(theme.isGroup);
-    if (!message.isAdmin && !message.fromMe) return message.send(theme.isAdmin);
+    if (!message.isAdmin && !message.isfromMe)
+      return message.send(theme.isAdmin);
 
     if (!match)
       return message.send(
@@ -383,13 +378,11 @@ Module({
   }
 });
 
-
 Module({
   command: "invite",
   package: "group",
   description: "Get group invite link",
 })(async (message) => {
- 
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -408,7 +401,6 @@ Module({
   package: "group",
   description: "Revoke group invite link",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -431,7 +423,7 @@ Module({
     await message.loadGroupInfo();
 
     if (!message.isGroup) return message.send(theme.isGroup);
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     await message.sendreply("👋 _Goodbye! Leaving the group..._");
 
@@ -449,7 +441,6 @@ Module({
   package: "group",
   description: "Lock group info (only admins can edit)",
 })(async (message) => {
-  
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -466,7 +457,6 @@ Module({
   package: "group",
   description: "Unlock group info (all members can edit)",
 })(async (message) => {
- 
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -485,7 +475,6 @@ Module({
   package: "group",
   description: "Approve pending join requests",
 })(async (message) => {
- 
   try {
     if (!(await checkPermissions(message))) return;
 
@@ -509,7 +498,6 @@ Module({
   package: "group",
   description: "Reject pending join requests",
 })(async (message) => {
-
   try {
     if (!(await checkPermissions(message))) return;
 

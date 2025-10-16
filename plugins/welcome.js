@@ -10,7 +10,7 @@ Module({
 })(async (message, match) => {
   await message.loadGroupInfo();
   if (!message.isGroup) return message.send(theme.isGroup);
-  if (!message.isAdmin && !message.fromMe) return message.send(theme.isAdmin);
+  if (!message.isAdmin && !message.isfromMe) return message.send(theme.isAdmin);
 
   const defaultText = `
   *╭ׂ┄─ׅ─ׂ┄─ׂ┄─ׅ─ׂ┄─ׂ┄─ׅ─ׂ┄──*
@@ -108,7 +108,7 @@ Module({
 })(async (message, match) => {
   await message.loadGroupInfo();
   if (!message.isGroup) return message.send(theme.isGroup);
-  if (!message.isAdmin && !message.fromMe) return message.send(theme.isAdmin);
+  if (!message.isAdmin && !message.isfromMe) return message.send(theme.isAdmin);
   const defaultText = `
   *╭ׂ┄─ׅ─ׂ┄─ׂ┄─ׅ─ׂ┄─ׂ┄─ׅ─ׂ┄──*
   *│  ̇─̣─̇─̣〘 gσσ∂вує 〙̣─̇─̣─̇*

@@ -8,7 +8,7 @@ Module({
 })(async (m, text) => {
   await m.loadGroupInfo(m.from);
   if (!m.isGroup) return m.send(theme.isGroup);
-  if (!m.isAdmin || !m.fromMe) return m.send(theme.isAdmin);
+  if (!m.isAdmin || !m.isfromMe) return m.send(theme.isAdmin);
   try {
     const conn = m.conn;
     const from = m.from;
