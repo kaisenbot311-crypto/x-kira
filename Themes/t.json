@@ -3,6 +3,7 @@
     "isAdmin": "admin & bot use",
     "isBotAdmin": "Garfield",
     "fromMe": "only bot use",
+    "isfromMe": "only bot",
     "botName": "Garfield",
     "owner": "Diegoson",
     "image": "https://files.catbox.moe/lq7nwm.jpg",

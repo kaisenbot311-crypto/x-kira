@@ -10,7 +10,7 @@ Module({
   package: "owner",
   description: "Toggle auto view WhatsApp status",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -44,7 +44,7 @@ Module({
   package: "owner",
   description: "Toggle auto typing in chats",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -78,7 +78,7 @@ Module({
   package: "owner",
   description: "Toggle auto voice recording in chats",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -112,7 +112,7 @@ Module({
   package: "owner",
   description: "Toggle auto react to messages",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -145,7 +145,7 @@ Module({
   package: "owner",
   description: "Block users who call the bot",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -179,7 +179,7 @@ Module({
   package: "owner",
   description: "Toggle auto read messages",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();
@@ -213,7 +213,7 @@ Module({
   package: "owner",
   description: "Toggle auto save viewed statuses",
 })(async (message, match) => {
-  if (!message.fromMe) return message.send(theme.isfromMe);
+  if (!message.isfromMe) return message.send(theme.isfromMe);
 
   const botNumber = message.conn.user.id.split(":")[0];
   const input = match?.trim().toLowerCase();

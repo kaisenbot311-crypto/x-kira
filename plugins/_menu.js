@@ -79,8 +79,6 @@ Module({
     }
   }
 
-  _cmd_st += `\nX-kira mini bot`;
-
   const channelJid = "120363400835083687@newsletter";
   const channelName = "© X-kira";
   const serverMessageId = 7;

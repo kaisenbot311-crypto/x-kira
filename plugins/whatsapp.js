@@ -11,7 +11,7 @@ Module({
   description: "Block a user",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!message.quoted)
       return message.send("_Reply to the user you want to block_");
 
@@ -34,7 +34,7 @@ Module({
   description: "Unblock a user",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!message.quoted)
       return message.send("_Reply to the user you want to unblock_");
 
@@ -57,7 +57,7 @@ Module({
   description: "Set bot profile picture",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     if (
       message.type !== "imageMessage" &&
@@ -85,7 +85,7 @@ Module({
   description: "Set bot status/bio",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!match)
       return message.send(
         "_Provide bio text_\n\nExample: .setbio Hello, I am a bot"
@@ -105,7 +105,7 @@ Module({
   description: "Set bot status message",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!match)
       return message.send(
         "_Provide status text_\n\nExample: .setstatus Available"
@@ -125,7 +125,7 @@ Module({
   description: "Broadcast message to all chats",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!match) return message.send("_Provide broadcast message_");
 
     const chats = message.conn.chats
@@ -164,7 +164,7 @@ Module({
   description: "Get bio/status of a user",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     const jid =
       message.quoted?.participant ||
@@ -193,7 +193,7 @@ Module({
   description: "Restart the bot",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     await message.send("🔄 _Restarting bot..._");
     process.exit(0); // Use PM2 or similar to auto-restart
@@ -210,7 +210,7 @@ Module({
   description: "Save quoted message media",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     if (!message.quoted) return message.send("_Reply to a media message_");
 
     const type = message.quoted.type;
@@ -254,7 +254,7 @@ Module({
   description: "Join group via invite link",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     const inviteCode = match?.match(
       /chat.whatsapp.com\/([0-9A-Za-z]{20,24})/i

@@ -13,7 +13,7 @@ Module({
   description: "Get username of mentioned user",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     const jid =
       message.quoted?.participant ||
@@ -58,7 +58,7 @@ Module({
   description: "Get the bot's own WhatsApp name",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
     const botName = message.conn.user?.name || "Name not set";
     const msg = `𝗛𝗲𝘆! 𝗠𝘆 𝗻𝗮𝗺𝗲 𝗶𝘀 *${botName}*`;
     await message.sendreply(msg);
@@ -74,7 +74,7 @@ Module({
   description: "Set bot display name",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     if (!match) {
       return message.send("_Provide new name_\n\nExample: .setname MyBot");
@@ -122,7 +122,7 @@ Module({
   description: "Leave all groups except specified",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMev) return message.send(theme.isfromMe);
 
     const groups = message.conn.chats
       .all()
@@ -182,7 +182,7 @@ Module({
   description: "Change profile picture from URL or quoted image",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     let buffer;
 
@@ -221,7 +221,7 @@ Module({
   description: "Remove bot profile picture",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     await message.conn.removeProfilePicture(message.conn.user.id);
     await message.send("✅ _Profile picture removed successfully_");
@@ -237,7 +237,7 @@ Module({
   description: "Get list of all blocked users",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     const blocklist = await message.conn.fetchBlocklist();
 
@@ -269,7 +269,7 @@ Module({
   description: "Unblock all blocked users",
 })(async (message) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     const blocklist = await message.conn.fetchBlocklist();
 
@@ -303,7 +303,7 @@ Module({
   description: "Set WhatsApp about/bio",
 })(async (message, match) => {
   try {
-    if (!message.fromMe) return message.send(theme.isfromMe);
+    if (!message.isfromMe) return message.send(theme.isfromMe);
 
     if (!match) {
       return message.send(

@@ -22,7 +22,7 @@ const checkPermissions = async (message) => {
     return false;
   }
 
-  if (!message.isAdmin && !message.fromMe) {
+  if (!message.isAdmin && !message.isfromMe) {
     await message.send(theme.isAdmin);
     return false;
   }
