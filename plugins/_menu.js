@@ -2,25 +2,36 @@ const os = require("os");
 const { Module, commands } = require("../lib/plugins");
 const { getTheme } = require("../Themes/themes");
 const theme = getTheme();
-
+const { getRandomPhoto } = require("./bin/menu_img");
 const config = require("../config");
 const TextStyles = require("../lib/textfonts");
 const styles = new TextStyles();
 
-const star = "⛥";
-const name = "X-kira";
+const name = "X-kira ━ 𝐁𝕺𝐓";
+
+const runtime = (secs) => {
+  const pad = (s) => s.toString().padStart(2, "0");
+  const h = Math.floor(secs / 3600);
+  const m = Math.floor((secs % 3600) / 60);
+  const s = Math.floor(secs % 60);
+  return `${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+};
+
+const readMore = String.fromCharCode(8206).repeat(4001);
 
 Module({
   command: "menu",
   package: "general",
   description: "Show all commands or a specific package",
 })(async (message, match) => {
-  const hostname = os.hostname();
   const time = new Date().toLocaleTimeString("en-ZA", {
     timeZone: "Africa/Johannesburg",
   });
   const mode = config.WORK_TYPE || process.env.WORK_TYPE;
-  const ramUsedMB = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+  const userName = message.pushName || "User";
+  const usedGB = ((os.totalmem() - os.freemem()) / 1073741824).toFixed(2);
+  const totGB = (os.totalmem() / 1073741824).toFixed(2);
+  const ram = `${usedGB} / ${totGB} GB`;
 
   const grouped = commands
     .filter((cmd) => cmd.command && cmd.command !== "undefined")
@@ -34,57 +45,57 @@ Module({
   let _cmd_st = "";
 
   if (match && grouped[match.toLowerCase()]) {
+    // Single package view
     const pack = match.toLowerCase();
-    _cmd_st += `╭───╼「 *${styles.toMonospace(pack.toUpperCase())}* 」─╼\n`;
+    _cmd_st += `\n *╭────❒ ${pack.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
     grouped[pack]
       .sort((a, b) => a.localeCompare(b))
       .forEach((cmdName) => {
-        _cmd_st += `┃ ${styles.toMonospace(cmdName)}\n`;
+        _cmd_st += ` *├◈ ${cmdName}*\n`;
       });
-    _cmd_st += `╰──────────╼\n`;
+    _cmd_st += ` *┕──────────────────❒*\n`;
   } else {
-    _cmd_st += `╭──╼「 *${styles.toMonospace(name)}* 」─╼\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} Host: ${styles.toMonospace(
-      hostname
-    )}\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} User: ${styles.toMonospace(
-      message.pushName
-    )}\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} Prefix: ${config.prefix}\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} Time: ${styles.toMonospace(
-      time
-    )}\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} Mode: ${styles.toMonospace(
-      mode
-    )}\n`;
-    _cmd_st += `┃ ${styles.toMonospace(star)} Ram: ${ramUsedMB} MB\n`;
-    _cmd_st += `╰──────────╼\n\n`;
+    // Main menu
+    _cmd_st += `
+*╭══〘〘 ${name} 〙〙*
+*┃❍ ʀᴜɴ     :* ${runtime(process.uptime())}
+*┃❍ ᴍᴏᴅᴇ    :* Public
+*┃❍ ᴘʀᴇғɪx  :* ${config.prefix}
+*┃❍ ʀᴀᴍ     :* ${ram}
+*┃❍ ᴛɪᴍᴇ    :* ${time}
+*┃❍ ᴜsᴇʀ    :* ${userName}
+*╰═════════════════⊷*
+${readMore}
+*♡︎•━━━━━━☻︎━━━━━━•♡︎*
+`;
 
     if (match && !grouped[match.toLowerCase()]) {
-      _cmd_st += `_not found: ${match}_\n\n`;
-      _cmd_st += `packages:\n`;
+      _cmd_st += `\n⚠️ *Package not found: ${match}*\n\n`;
+      _cmd_st += `*Available Packages*:\n`;
       categories.forEach((cat) => {
-        _cmd_st += `- ${cat}\n`;
+        _cmd_st += `├◈ ${cat}\n`;
       });
     } else {
+      // All categories
       for (const cat of categories) {
-        _cmd_st += `╭───╼「 *${styles.toMonospace(cat.toUpperCase())}* 」\n`;
+        _cmd_st += `\n *╭────❒ ${cat.toUpperCase()} ❒⁠⁠⁠⁠*\n`;
         grouped[cat]
           .sort((a, b) => a.localeCompare(b))
           .forEach((cmdName) => {
-            _cmd_st += `┃ ${styles.toMonospace(cmdName)}\n`;
+            _cmd_st += ` *├◈ ${cmdName}*\n`;
           });
-        _cmd_st += `╰──────────╼\n`;
+        _cmd_st += ` *┕──────────────────❒*\n`;
       }
     }
-  }
 
+    _cmd_st += `\n💖 *~_Made with love by X-kira_~*`;
+  }
   const channelJid = "120363400835083687@newsletter";
   const channelName = "© X-kira";
-  const serverMessageId = 7;
+  const serverMessageId = 6;
 
   const opts = {
-    image: { url: "https://files.catbox.moe/n9ectm.jpg" },
+    image: { url: getRandomPhoto() || "https://files.catbox.moe/n9ectm.jpg" },
     caption: _cmd_st,
     mimetype: "image/jpeg",
     contextInfo: {
@@ -137,7 +148,7 @@ Module({
 `;
 
   await message.send({
-    image: { url: "https://files.catbox.moe/n9ectm.jpg" },
+    image: { url: getRandomPhoto() },
     caption: ctx,
   });
 });

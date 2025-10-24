@@ -15,7 +15,7 @@ Module({
 
 
 Module({
-  command: 'short',
+  command: 'shorturl',
   package: 'tools',
   description: 'Shorten a url using tinyurl',
 })(async (message, match) => {
