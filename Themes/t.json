@@ -1,9 +1,9 @@
 {
-    "isGroup": "only use group",
-    "isAdmin": "admin & bot use",
+    "isGroup": "_This command is only for groups._",
+    "isAdmin": "_Only group admins or bot owner can use this command._",
     "isBotAdmin": "Garfield",
     "fromMe": "only bot use",
-    "isfromMe": "only bot",
+    "isfromMe": "_Only bot owner can use this command._",
     "botName": "Garfield",
     "owner": "Diegoson",
     "image": "https://files.catbox.moe/lq7nwm.jpg",
