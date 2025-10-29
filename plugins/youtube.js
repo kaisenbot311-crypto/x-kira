@@ -59,7 +59,7 @@ async function handleSongDownload(conn, input, message) {
   const urlRegex = /(?:youtube\.com\/.*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
   if (!urlRegex.test(input)) {
     // Search for the song
-
+    await message.react("🔍");
     const searchResults = await yts(input);
     if (!searchResults.videos || searchResults.videos.length === 0) {
       return await message.send("❌ No results found");
@@ -74,6 +74,7 @@ async function handleSongDownload(conn, input, message) {
   }
 
   // Download audio
+  await message.react("⬇️");
   const audioData = await downloadYtAudio(videoUrl);
 
   // Download the audio file
@@ -82,6 +83,7 @@ async function handleSongDownload(conn, input, message) {
   });
 
   // Send audio with thumbnail and link preview
+  await message.react("🎧");
   await conn.sendMessage(message.from, {
     audio: Buffer.from(audioBuffer.data),
     mimetype: "audio/mpeg",
@@ -275,94 +277,5 @@ Module({
   } catch (err) {
     console.error("[PLUGIN PLAY] Error:", err?.message || err);
     await message.send("⚠️ Playback failed. Please try again later.");
-  }
-});
-
-Module({ on: "text" })(async (message) => {
-  if (!message.quoted) return;
-  let body =
-    message.quoted.body ||
-    message.quoted.msg?.text ||
-    message.quoted.msg?.caption ||
-    "";
-  if (!body.includes("⬤") && !body.includes("⬢")) return;
-
-  let choice = message.body.trim();
-  if (!["1", "2"].includes(choice)) return;
-
-  let lines = body.split("\n");
-
-  // Extract YouTube URL from the search results
-  let videoUrl = null;
-  for (let line of lines) {
-    if (line.includes("youtube.com") || line.includes("youtu.be")) {
-      // Extract URL from the line
-      const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
-      if (urlMatch) {
-        videoUrl = urlMatch[1];
-        break;
-      }
-    }
-  }
-
-  if (!videoUrl) return await message.send("_Could not find YouTube URL_");
-
-  try {
-    if (choice === "1") {
-      const audioData = await downloadYtAudio(videoUrl);
-
-      const audioBuffer = await axios.get(audioData.download_url, {
-        responseType: "arraybuffer",
-      });
-
-      const thumbnailBuffer = await axios.get(audioData.thumbnail, {
-        responseType: "arraybuffer",
-      });
-
-      await message.conn.sendMessage(message.from, {
-        audio: Buffer.from(audioBuffer.data),
-        mimetype: "audio/mpeg",
-        fileName: `${audioData.title}.mp3`,
-        contextInfo: {
-          externalAdReply: {
-            title: audioData.title,
-            body: `Duration: ${Math.floor(audioData.duration / 60)}:${(
-              audioData.duration % 60
-            )
-              .toString()
-              .padStart(2, "0")}`,
-            thumbnail: Buffer.from(thumbnailBuffer.data),
-            mediaType: 2,
-            mediaUrl: videoUrl,
-            sourceUrl: videoUrl,
-          },
-        },
-      });
-    } else if (choice === "2") {
-      const videoData = await downloadYtVideo(videoUrl, "720p");
-
-      const videoBuffer = await axios.get(videoData.download_url, {
-        responseType: "arraybuffer",
-      });
-
-      const thumbnailBuffer = await axios.get(videoData.thumbnail, {
-        responseType: "arraybuffer",
-      });
-
-      await message.conn.sendMessage(message.from, {
-        video: Buffer.from(videoBuffer.data),
-        caption: `*${videoData.title}*\n\n📹 Quality: ${
-          videoData.format
-        }\n⏱️ Duration: ${Math.floor(videoData.duration / 60)}:${(
-          videoData.duration % 60
-        )
-          .toString()
-          .padStart(2, "0")}`,
-        jpegThumbnail: Buffer.from(thumbnailBuffer.data),
-      });
-    }
-  } catch (err) {
-    console.error("[PLUGIN TEXT HANDLER] Error:", err?.message || err);
-    await message.send("⚠️ Download failed. Please try again later.");
   }
 });
