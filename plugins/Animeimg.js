@@ -513,30 +513,6 @@ Module({
   }
 });
 
-// Boobs command
-Module({
-  command: "boobs",
-  package: "xxx",
-  description: "Download boobs Images"
-})(async (message, match) => {
-  try {
-    const apiUrl = "https://r4bbit-api.vercel.app/api/boobs";
-    await message.conn.sendMessage(message.from, {
-      image: { url: apiUrl },
-      caption: "> Here is your boobs image!"
-    });
-  } catch (e) {
-    if (e.response) {
-      await message.send(`API Error: ${e.response.status} - ${e.response.data?.message || "No message provided"}`);
-    } else if (e.request) {
-      await message.send("Network Error: API server not responding. Please try again later.");
-    } else {
-      await message.send("Unexpected Error: Please try again later.");
-    }
-    console.log(e);
-  }
-});
-
 // Cuddle command
 Module({
   command: "cuddle",

@@ -1,7 +1,4 @@
 const { Module } = require("../lib/plugins");
-const channelJid = "120363400835083687@newsletter";
-const channelName = "";
-const serverMessageId = 6;
 
 Module({
   command: "ping",
@@ -9,7 +6,6 @@ Module({
   description: "Replies with the bot latency",
 })(async (message) => {
   const start = Date.now();
-  // Contact-style quote
   let gift = {
     key: {
       fromMe: false,
@@ -97,7 +93,6 @@ Module({
   ];
   const emoji = emojis[Math.floor(Math.random() * emojis.length)];
   await message.react(emoji);
-  // const sent = await message.send("🏓 Pong...");
   const latency = Date.now() - start;
   //await message.send(`*${emoji}⧫𝔓⦿𝖓𝖌 ${latency} 𝖒ˢ*`, { edit: sent.key });
 

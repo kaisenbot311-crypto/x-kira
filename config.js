@@ -10,14 +10,9 @@ module.exports = {
   prefix: process.env.PREFIX || ".",
   owner: process.env.OWNER_NUMBER || "917074029156",
   sudo: process.env.SUDO || "917074029156",
-  packname: process.env.PACKNAME || "ɠαɾϝιҽʅɗ",
-  author: process.env.AUTHOR || "ɳαxσɾ",
-  SESSION_ID: process.env.SESSION_ID || "",
+  SESSION_ID: process.env.SESSION_ID || "𓂃ᷱ᪳𝘅_𝗸𝗶𝗿𝗮_𝐁𓋜𝐓≈y4rw0y7g^☁️",
   THEME: process.env.THEME || "t", //Garfield
   maxFileSize: parseInt(process.env.MAX_FILE_SIZE) || 100 * 1024 * 1024,
-  timezone: process.env.TIMEZONE || "UTC",
-  GIST_URL: process.env.GIST_URL || "",
-  MONGODB_URI: process.env.MONGODB_URI || "",
   WORK_TYPE: process.env.WORK_TYPE || "public",
   STATUS_REACT: isTrue(process.env.STATUS_REACT) || false, // true
 

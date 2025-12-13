@@ -12,31 +12,25 @@ Module({
 })(async (message, match) => {
   if (!message.isFromMe) return message.send(theme.isfromMe);
 
-  const botNumber = message.conn.user.id.split(":")[0];
-  const input = match?.trim().toLowerCase();
+  const input = match?.trim()?.toLowerCase();
 
   if (input === "on" || input === "off") {
-    await message.react("⏳");
-    const result = await personalDB(
-      ["status_view"],
-      { content: input === "on" ? "true" : "false" },
-      "set",
-      botNumber
-    );
-    await message.react(result ? "✅" : "❌");
-    return await message.send(
-      result
-        ? `✅ *Auto status view is now \`${input.toUpperCase()}\`*`
-        : "❌ *Error updating auto status view*"
+    await db.setGlobal("autostatus_seen", input === "on");
+    return message.send(
+      `✅ *Auto Status Seen is now ${input === "on" ? "ON" : "OFF"}*`
     );
   }
 
-  const data = await personalDB(["status_view"], {}, "get", botNumber);
-  const status = data?.status_view === "true";
-  return await message.send(
-    `⚙️ *Auto Status View*\n> Status: ${
-      status ? "✅ ON" : "❌ OFF"
-    }\n\nUse:\n• astatus on\n• astatus off`
+  const { autostatus_seen } = db.getMultiple(
+    null,
+    ["autostatus_seen"],
+    { autostatus_seen: config.STATUS_SEEN || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto Status Seen*\n> Status: ${
+      autostatus_seen ? "✅ ON" : "❌ OFF"
+    }\n\nUse:\n• autostatus on\n• autostatus off`
   );
 });
 
@@ -44,34 +38,28 @@ Module({
 Module({
   command: "autotyping",
   package: "owner",
-  description: "Toggle auto typing in chats",
+  description: "Toggle auto typing",
 })(async (message, match) => {
   if (!message.isFromMe) return message.send(theme.isfromMe);
 
-  const botNumber = message.conn.user.id.split(":")[0];
-  const input = match?.trim().toLowerCase();
+  const input = match?.trim()?.toLowerCase();
 
   if (input === "on" || input === "off") {
-    await message.react("⏳");
-    const result = await personalDB(
-      ["autotyping"],
-      { content: input === "on" ? "true" : "false" },
-      "set",
-      botNumber
-    );
-    await message.react(result ? "✅" : "❌");
-    return await message.send(
-      result
-        ? `✅ *Auto typing is now \`${input.toUpperCase()}\`*`
-        : "❌ *Error updating auto typing*"
+    await db.setGlobal("autotyping", input === "on");
+    return message.send(
+      `✅ *Auto Typing is now ${input === "on" ? "ON" : "OFF"}*`
     );
   }
 
-  const data = await personalDB(["autotyping"], {}, "get", botNumber);
-  const status = data?.autotyping === "true";
-  return await message.send(
+  const { autotyping } = db.getMultiple(
+    null,
+    ["autotyping"],
+    { autotyping: config.AUTOTYPING || false }
+  );
+
+  return message.send(
     `⚙️ *Auto Typing*\n> Status: ${
-      status ? "✅ ON" : "❌ OFF"
+      autotyping ? "✅ ON" : "❌ OFF"
     }\n\nUse:\n• autotyping on\n• autotyping off`
   );
 });
@@ -116,33 +104,28 @@ Module({
 Module({
   command: "autoreact",
   package: "owner",
-  description: "Toggle auto react to messages",
+  description: "Toggle auto react",
 })(async (message, match) => {
   if (!message.isFromMe) return message.send(theme.isfromMe);
 
-  const botNumber = message.conn.user.id.split(":")[0];
-  const input = match?.trim().toLowerCase();
+  const input = match?.trim()?.toLowerCase();
 
   if (input === "on" || input === "off") {
-    await message.react("⏳");
-    const result = await personalDB(
-      ["autoreact"],
-      { content: input === "on" ? "true" : "false" },
-      "set",
-      botNumber
-    );
-    await message.react(result ? "✅" : "❌");
-    return await message.send(
-      result
-        ? `✅ *AutoReact is now \`${input.toUpperCase()}\`*`
-        : "❌ *Error updating AutoReact*"
+    await db.setGlobal("autoreact", input === "on");
+    return message.send(
+      `✅ *Auto React is now ${input === "on" ? "ON" : "OFF"}*`
     );
   }
 
-  const settings = await personalDB(["autoreact"], {}, "get", botNumber);
-  return await message.send(
-    `⚙️ *AutoReact*\n> Status: ${
-      settings?.autoreact === "true" ? "✅ ON" : "❌ OFF"
+  const { autoreact } = db.getMultiple(
+    null,
+    ["autoreact"],
+    { autoreact: config.AUTOREACT || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto React*\n> Status: ${
+      autoreact ? "✅ ON" : "❌ OFF"
     }\n\nUse:\n• autoreact on\n• autoreact off`
   );
 });
@@ -191,30 +174,24 @@ Module({
 })(async (message, match) => {
   if (!message.isFromMe) return message.send(theme.isfromMe);
 
-  const botNumber = message.conn.user.id.split(":")[0];
-  const input = match?.trim().toLowerCase();
+  const input = match?.trim()?.toLowerCase();
 
   if (input === "on" || input === "off") {
-    await message.react("⏳");
-    const result = await personalDB(
-      ["autoread"],
-      { content: input === "on" ? "true" : "false" },
-      "set",
-      botNumber
-    );
-    await message.react(result ? "✅" : "❌");
-    return await message.send(
-      result
-        ? `✅ *AutoRead is now \`${input.toUpperCase()}\`*`
-        : "❌ *Error updating AutoRead*"
+    await db.setGlobal("autoread", input === "on");
+    return message.send(
+      `✅ *Auto Read is now ${input === "on" ? "ON" : "OFF"}*`
     );
   }
 
-  const data = await personalDB(["autoread"], {}, "get", botNumber);
-  const status = data?.autoread === "true";
-  return await message.send(
-    `⚙️ *AutoRead*\n> Status: ${
-      status ? "✅ ON" : "❌ OFF"
+  const { autoread } = db.getMultiple(
+    null,
+    ["autoread"],
+    { autoread: config.AUTOREAD || false }
+  );
+
+  return message.send(
+    `⚙️ *Auto Read*\n> Status: ${
+      autoread ? "✅ ON" : "❌ OFF"
     }\n\nUse:\n• autoread on\n• autoread off`
   );
 });
