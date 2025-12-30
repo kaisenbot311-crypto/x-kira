@@ -6,7 +6,7 @@ if (fs.existsSync(envPath)) {
 }
 const isTrue = (x) => String(x).toLowerCase() === "true";
 
-module.exports = {
+module.exports = { //test 
   // ================= SESSION ================= //
   SESSION_ID:
     process.env.SESSION_ID ||
