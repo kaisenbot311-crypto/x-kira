@@ -6,7 +6,7 @@ const mention = require('./bin/mention');
 Module({on:'text'})(async(message)=>{
   const b=message.body||'' // use ? 
   console.log(b)
-  //if(!message.isMentioned) return
+  if(!message.isMentioned) return
   // example shape
 const m = {
   sender: message.sender, 
@@ -23,8 +23,8 @@ const text = `type/audio https://files.catbox.moe/bxvk6r.mp3
   "forwardingScore": 5,
   "contextInfo": {
     "externalAdReply": {
-      "title": " ▀▄▀▄▀▄ name ▄▀▄▀▄▀ ",
-      "body": "ᴘᴏᴡᴇʀᴇᴅ ʙʏ name",
+      "title": " ▀▄▀▄▀▄ ×͜× ᴄ͢͢͢ʀɪᴍɪɴᴀʟ ×͜× ▄▀▄▀▄▀ ",
+      "body": "ᴘᴏᴡᴇʀᴇᴅ ʙʏ ×͜× ᴄ͢͢͢ʀɪᴍɪɴᴀʟ ×͜×",
       "showAdAttribution": true,
       "renderLargerThumbnail": true,
       "mediaType": 1,
