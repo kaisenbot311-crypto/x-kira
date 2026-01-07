@@ -9,7 +9,7 @@ const isTrue = (x) => String(x).toLowerCase() === "true";
 module.exports = {
   //test
   // ================= SESSION ================= //
-  SESSION_ID: process.env.SESSION_ID || "STARK-MD~DMdF1YRb#KhcSTSyWq7dRclw8tqxmG-xNda99gJifM66sGxSBark",
+  SESSION_ID: process.env.SESSION_ID || "STARK-MD~yBtWHJIL#77co_5CQ48UG9gehRla9onjzIKf-VnonWMJuQZcOWLQ",
   // ================= DATABASE ================= //
   DATABASE_URL: process.env.DATABASE_URL || "",
 

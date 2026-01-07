@@ -216,7 +216,7 @@ Module({
         const { text, wantsPp } = buildText(cfg.message, replacements);
         let imgBuf = null;
         if (wantsPp) imgBuf = await fetchProfileBuffer(conn, participantJid);
-        await sendWelcomeMsg(conn, groupJid, text, [participantJid], imgBuf);
+        await sendWelcomeMsg(conn, groupJid, text, participantJid, imgBuf);
       }
       // PROMOTE / DEMOTE -> PDM (global)
       if (event.action === "promote" || event.action === "demote") {

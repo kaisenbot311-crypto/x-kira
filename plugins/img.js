@@ -56,7 +56,6 @@ Module({
 async function searchGoogleImagesOriginal(query) {
   try {
     const encodedQuery = encodeURIComponent(query);
-    // Use image size parameter for larger images
     const url = `https://www.google.com/search?q=${encodedQuery}&tbm=isch&tbs=isz:l&hl=en`;
 
     const response = await axios.get(url, {
